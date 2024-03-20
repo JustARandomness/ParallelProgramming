@@ -20,13 +20,17 @@ int main(int argc, char *argv[])
         }
 
     }
-
+    MPI_Barrier(MPI_COMM_WORLD);
+    double t = MPI_Wtime();
     MPI_Bcast(buf,N,MPI_INT,0,MPI_COMM_WORLD);
 
     for (size_t i=0;i<N;i++){
         sum += buf[i];
     }
     printf("pid = %d sum = %d \n",pid,sum);
+    
+    MPI_Barrier(MPI_COMM_WORLD);
+    printf("Time for %d processes is %f", nprocs, MPI_Wtime() - t);
     free(buf);
     MPI_Finalize();
     return 0;
