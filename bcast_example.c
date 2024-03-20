@@ -28,9 +28,11 @@ int main(int argc, char *argv[])
         sum += buf[i];
     }
     printf("pid = %d sum = %d \n",pid,sum);
-    
+
     MPI_Barrier(MPI_COMM_WORLD);
-    printf("Time for %d processes is %f", nprocs, MPI_Wtime() - t);
+    if (pid == 0) {
+        printf("Time for %d processes is %f\n", nprocs, MPI_Wtime() - t);
+    }
     free(buf);
     MPI_Finalize();
     return 0;
