@@ -1,5 +1,5 @@
 #define MSMPI_NO_SAL
-#include "/opt/homebrew/opt/openmpi/include/mpi.h"
+#include "/opt/homebrew/opt/open-mpi/include/mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

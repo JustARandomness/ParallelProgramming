@@ -47,10 +47,11 @@ int main(int argc, char *argv[]) {
            "mass is "
            "%f\n",
            pid, x_points_array[i], y_points_array[i],
-           calculate_module(x_points_array[i], y_points_array[i], x_recv_buf,
-                            y_recv_buf));
+           calculate_module(x_points_array[i], y_points_array[i], avg_coord_x,
+                            avg_coord_y));
   }
-
+  free(x_points_array);
+  free(y_points_array);
   MPI_Finalize();
   return 0;
 }
