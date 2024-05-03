@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/lib/x86_64-linux-gnu/openmpi/include"
+                "/opt/homebrew/opt/openmpi/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

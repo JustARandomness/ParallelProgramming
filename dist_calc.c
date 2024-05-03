@@ -1,4 +1,4 @@
-#include "/opt/homebrew/opt/openmpi/include/mpi.h"
+#include "mpi.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,10 +25,11 @@ int main(int argc, char *argv[]) {
   for (int i = 0; i < num_per_proc; ++i) {
     x_points_array[i] = rand() % 201 - 100;
     y_points_array[i] = rand() % 201 - 100;
-    printf("x: %d, y: %d\n", x_points_array[i], y_points_array[i]);
+    printf("%d, %d\n", x_points_array[i], y_points_array[i]);
     x_s += x_points_array[i];
     y_s += y_points_array[i];
   }
+  printf("%f,%f\n", (float)x_s / num_per_proc, (float)y_s / num_per_proc);
 
   int x_recv_buf = 0;
   int y_recv_buf = 0;
@@ -42,14 +43,14 @@ int main(int argc, char *argv[]) {
     printf("Coordinates are (%f, %f)\n", avg_coord_x, avg_coord_y);
   }
 
-  for (int i = 0; i < num_per_proc; ++i) {
-    printf("Process id is %d\nDistance between point (%d, %d) and center of "
-           "mass is "
-           "%f\n",
-           pid, x_points_array[i], y_points_array[i],
-           calculate_module(x_points_array[i], y_points_array[i], avg_coord_x,
-                            avg_coord_y));
-  }
+  // for (int i = 0; i < num_per_proc; ++i) {
+  //   printf("Process id is %d\nDistance between point (%d, %d) and center of "
+  //          "mass is "
+  //          "%f\n",
+  //          pid, x_points_array[i], y_points_array[i],
+  //          calculate_module(x_points_array[i], y_points_array[i], avg_coord_x,
+  //                           avg_coord_y));
+  // }
   free(x_points_array);
   free(y_points_array);
   MPI_Finalize();
