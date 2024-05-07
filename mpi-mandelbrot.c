@@ -1,4 +1,4 @@
-#include "/opt/homebrew/opt/openmpi/include/mpi.h"
+#include "mpi.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
