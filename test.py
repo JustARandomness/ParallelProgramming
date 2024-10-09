@@ -1,17 +1,24 @@
-from mpi4py import MPI
-import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import matplotlib.lines as mlines
+import matplotlib.path as mpath
 
-world_comm = MPI.COMM_WORLD
-my_rank = world_comm.Get_rank()
-nprocs = world_comm.Get_size()
+plt.xlim(0, 1)
+plt.ylim(0, 1)
+plt.grid(True)
 
-if my_rank == 0:
-    data = np.ones((8, 10))
-else:
-    data = None
+ax = plt.gca()
+ax.set_aspect("equal")
 
-data = world_comm.scatter(data)
-world_comm.Barrier()
-
-print(f'process {my_rank}, data: {data}')
-
+r = 0.03
+circle1 = mpatches.Circle((r, 1 - r), radius=r, fill='True', color='g')
+ax.add_patch(circle1)
+circle2 = mpatches.Circle((r, r), radius=r, fill=True, color='r')
+ax.add_patch(circle2)
+plt.savefig("Circle05.png")
+for i in range(1, 75):
+    circle2 = mpatches.Circle(((i - 1) * 0.0125 + r, (i - 1)*0.0125 + r), radius=r + 0.1 * r, fill=True, color='w')
+    ax.add_patch(circle2)
+    circle2 = mpatches.Circle((i * 0.0125 + r, i * 0.0125 + r), radius=r + 0.1 * r, fill=True, color='r')
+    ax.add_patch(circle2)
+    file = './CircleAnimationTest/Circle' + str(i) + '.png'
